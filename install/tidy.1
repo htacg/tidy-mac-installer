@@ -1,5 +1,5 @@
 .\" tidy man page for the HTML Tidy
-.TH TIDY 1 "5.1.8" "HTML Tidy" "5.1.8"
+.TH TIDY 1 "5.1.14" "HTML Tidy" "5.1.14"
 
 .\" disable hyphenation
 .nh
@@ -839,6 +839,16 @@ Default: \fIno\fR
 Example: \fIauto, y/n, yes/no, t/f, true/false, 1/0\fR
 
 This option specifies if Tidy should print only the contents of the body tag as an HTML fragment. If set to "auto", this is performed only if the body tag has been inferred. Useful for incorporating existing whole pages as a portion of another page. This option has no effect if XML output is requested.
+.TP
+\fBskip-quotes\fR
+
+Type:    \fIBoolean\fR
+.br
+Default: \fIno\fR
+.br
+Example: \fIy/n, yes/no, t/f, true/false, 1/0\fR
+
+This option specifies that Tidy should skip quotes, and comments when parsing script data.
 .TP
 \fBuppercase-attributes\fR
 

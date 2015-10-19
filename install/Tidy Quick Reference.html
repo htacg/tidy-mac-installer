@@ -338,7 +338,7 @@
   <body>
     <h1 id="top">Quick Reference</h1>
     <h2>HTML Tidy Configuration Options</h2>
-    <p>Version: 5.1.8</p>
+    <p>Version: 5.1.14</p>
     <p>
       <a class="h3" href="#MarkupHeader">HTML, XHTML, XML</a>
       <br />
@@ -734,6 +734,13 @@
           <a href="#show-body-only">show-body-only</a>
         </td>
         <td>AutoBool</td>
+        <td>no</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#skip-quotes">skip-quotes</a>
+        </td>
+        <td>Boolean</td>
         <td>no</td>
       </tr>
       <tr>
@@ -2034,6 +2041,23 @@
       </tr>
       <tr>
         <td colspan="2">This option specifies if Tidy should print only the contents of the body tag as an HTML fragment. If set to "auto", this is performed only if the body tag has been inferred. Useful for incorporating existing whole pages as a portion of another page. This option has no effect if XML output is requested. </td>
+      </tr>
+      <tr>
+        <td>&#160;</td>
+      </tr>
+      <tr>
+        <td class="tabletitle" valign="top" id="skip-quotes">skip-quotes</td>
+        <td class="tabletitlelink" valign="top" align="right">
+          <a href="#top">Top</a>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top">Type: <strong>Boolean</strong><br />
+            Default: <strong>no</strong><br />Example: <strong>y/n, yes/no, t/f, true/false, 1/0</strong></td>
+        <td align="right" valign="top"></td>
+      </tr>
+      <tr>
+        <td colspan="2">This option specifies that Tidy should skip quotes, and comments when parsing script data. </td>
       </tr>
       <tr>
         <td>&#160;</td>
