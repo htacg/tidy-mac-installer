@@ -85,7 +85,7 @@ the `install` directory.
 Update the version number to match the HTML Tidy version.
 
 - **Project** > **Presentation** (tab) > **Title** (popup menu)
-- **Packages** > **HTML Tidy** > **Scripts** > **Installer-Post.sh** > V_ORIG, V_MAJOR, V_GEN
+- **Packages** > **HTML Tidy** > **Scripts** > **Installer-Post.sh** > V_ORIG, V_MAJOR
 
 
 ### Sign the package with a developer certificate
