@@ -1,5 +1,5 @@
 .\" tidy man page for the HTML Tidy
-.TH TIDY 1 "5.0.0" "HTML Tidy" "5.0.0"
+.TH TIDY 1 "5.1.8" "HTML Tidy" "5.1.8"
 
 .\" disable hyphenation
 .nh
@@ -1024,13 +1024,13 @@ This option specifies the number of columns that Tidy uses between successive ta
 .TP
 \fBvertical-space\fR
 
-Type:    \fIBoolean\fR
+Type:    \fIAutoBool\fR
 .br
 Default: \fIno\fR
 .br
-Example: \fIy/n, yes/no, t/f, true/false, 1/0\fR
+Example: \fIauto, y/n, yes/no, t/f, true/false, 1/0\fR
 
-This option specifies if Tidy should add some empty lines for readability.
+This option specifies if Tidy should add some extra empty lines for readability. Default is 'no'. If set to 'auto', will eliminate nearly all newline chars.
 .TP
 \fBwrap\fR
 

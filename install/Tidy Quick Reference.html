@@ -338,7 +338,7 @@
   <body>
     <h1 id="top">Quick Reference</h1>
     <h2>HTML Tidy Configuration Options</h2>
-    <p>Version: 5.0.0</p>
+    <p>Version: 5.1.8</p>
     <p>
       <a class="h3" href="#MarkupHeader">HTML, XHTML, XML</a>
       <br />
@@ -887,7 +887,7 @@
         <td>
           <a href="#vertical-space">vertical-space</a>
         </td>
-        <td>Boolean</td>
+        <td>AutoBool</td>
         <td>no</td>
       </tr>
       <tr>
@@ -2358,12 +2358,12 @@
         </td>
       </tr>
       <tr>
-        <td valign="top">Type: <strong>Boolean</strong><br />
-            Default: <strong>no</strong><br />Example: <strong>y/n, yes/no, t/f, true/false, 1/0</strong></td>
+        <td valign="top">Type: <strong>AutoBool</strong><br />
+            Default: <strong>no</strong><br />Example: <strong>auto, y/n, yes/no, t/f, true/false, 1/0</strong></td>
         <td align="right" valign="top"></td>
       </tr>
       <tr>
-        <td colspan="2">This option specifies if Tidy should add some empty lines for readability. </td>
+        <td colspan="2">This option specifies if Tidy should add some extra empty lines for readability. Default is 'no'. If set to 'auto', will eliminate nearly all newline chars.</td>
       </tr>
       <tr>
         <td>&#160;</td>
