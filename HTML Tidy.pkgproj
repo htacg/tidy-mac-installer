@@ -498,7 +498,7 @@
 													<key>GID</key>
 													<integer>0</integer>
 													<key>PATH</key>
-													<string>install/libtidy.5.1.14.dylib</string>
+													<string>install/libtidy.5.1.24.dylib</string>
 													<key>PATH_TYPE</key>
 													<integer>1</integer>
 													<key>PERMISSIONS</key>
@@ -957,7 +957,7 @@
 						<key>LANGUAGE</key>
 						<string>English</string>
 						<key>VALUE</key>
-						<string>HTML Tidy 5.1.14</string>
+						<string>HTML Tidy 5.1.24</string>
 					</dict>
 				</array>
 			</dict>

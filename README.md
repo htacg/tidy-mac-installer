@@ -18,7 +18,7 @@ Releases and versioning
 
 Disk images will be added to [HTACG binaries repository][4] any time other builds are
 added to the repository. We will strive to ensure that this only happens coincident with
-official [HTML Tidy releases][5] (as of 2015-October there is still some mismatch).
+official [HTML Tidy releases][5] (as of 2015-November there is still some mismatch).
 
 
 General
