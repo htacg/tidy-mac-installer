@@ -11,7 +11,7 @@ chown $USER "$QR"
 chown $USER "$RM"
 
 # Create symbolic links to dylib
-V_ORIG="libtidy.5.1.24.dylib"
+V_ORIG="libtidy.5.1.25.dylib"
 V_MAJOR="libtidy.5.dylib"
 V_GEN="libtidy.dylib"
 
