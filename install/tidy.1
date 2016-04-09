@@ -1,5 +1,5 @@
 .\" tidy man page for the HTML Tidy
-.TH TIDY 1 "5.1.25" "HTML Tidy" "5.1.25"
+.TH TIDY 1 "5.2.0" "HTML Tidy" "5.2.0"
 
 .\" disable hyphenation
 .nh
@@ -21,17 +21,17 @@ For command line options that expect a numerical argument, a default is assumed 
 .SS File manipulation
   
 .TP
-\fB-output <file>\fR, \fB-o <file>\fR
+\fB-output <%s>\fR, \fB-o <%s>\fR
 write output to the specified <file>
-(\fIoutput-file: <file>\fR)
+(\fIoutput-file: <%s>\fR)
 .TP
-\fB-config <file>\fR
+\fB-config <%s>\fR
 set configuration options from the specified <file>
 
 .TP
-\fB-file <file>\fR, \fB-f <file>\fR
+\fB-file <%s>\fR, \fB-f <%s>\fR
 write errors and warnings to the specified <file>
-(\fIerror-file: <file>\fR)
+(\fIerror-file: <%s>\fR)
 .TP
 \fB-modify\fR, \fB-m\fR
 modify the original input files
@@ -43,16 +43,16 @@ modify the original input files
 indent element content
 (\fIindent: auto\fR)
 .TP
-\fB-wrap <column>\fR, \fB-w <column>\fR
-wrap text at the specified <column>. 0 is assumed if <column> is missing. When this option is omitted, the default of the configuration option "wrap" applies.
-(\fIwrap: <column>\fR)
+\fB-wrap <%s>\fR, \fB-w <%s>\fR
+wrap text at the specified <column>. 0 is assumed if <column> is missing. When this option is omitted, the default of the configuration option 'wrap' applies.
+(\fIwrap: <%s>\fR)
 .TP
 \fB-upper\fR, \fB-u\fR
 force tags to upper case
 (\fIuppercase-tags: yes\fR)
 .TP
 \fB-clean\fR, \fB-c\fR
-replace FONT, NOBR and CENTER tags by CSS
+replace FONT, NOBR and CENTER tags with CSS
 (\fIclean: yes\fR)
 .TP
 \fB-bare\fR, \fB-b\fR
@@ -60,7 +60,7 @@ strip out smart quotes and em dashes, etc.
 (\fIbare: yes\fR)
 .TP
 \fB-gdoc\fR, \fB-g\fR
-produce clean version of html exported by google docs
+produce clean version of html exported by Google Docs
 (\fIgdoc: yes\fR)
 .TP
 \fB-numeric\fR, \fB-n\fR
@@ -91,9 +91,9 @@ convert HTML to well formed XHTML
 force XHTML to well formed HTML
 (\fIoutput-html: yes\fR)
 .TP
-\fB-access <level>\fR
+\fB-access <%s>\fR
 do additional accessibility checks (<level> = 0, 1, 2, 3). 0 is assumed if <level> is missing.
-(\fIaccessibility-check: <level>\fR)
+(\fIaccessibility-check: <%s>\fR)
 .SS Character encodings
   
 .TP
@@ -152,10 +152,6 @@ use Big5 for both input and output
 \fB-shiftjis\fR
 use Shift_JIS for both input and output
 
-.TP
-\fB-language <lang>\fR
-set the two-letter language code <lang> (for future use)
-(\fIlanguage: <lang>\fR)
 .SS Miscellaneous
   
 .TP
@@ -167,20 +163,42 @@ show the version of Tidy
 list the command line options
 
 .TP
-\fB-xml-help\fR
-list the command line options in XML format
-
-.TP
 \fB-help-config\fR
 list all configuration options
+
+.TP
+\fB-show-config\fR
+list the current configuration settings
+
+.TP
+\fB-help-option <%s>\fR
+show a description of the <option>
+
+.TP
+\fB-language <%s>\fR
+set Tidy's output language to <lang>. Specify '-language help' for more help. Use before output-causing arguments to ensure the language takes effect, e.g.,`tidy -lang es -lang help`.
+(\fIlanguage: <%s>\fR)
+.SS XML
+  
+.TP
+\fB-xml-help\fR
+list the command line options in XML format
 
 .TP
 \fB-xml-config\fR
 list all configuration options in XML format
 
 .TP
-\fB-show-config\fR
-list the current configuration settings
+\fB-xml-strings\fR
+output all of Tidy's strings in XML format
+
+.TP
+\fB-xml-error-strings\fR
+output error constants and strings in XML format
+
+.TP
+\fB-xml-options-strings\fR
+output option descriptions in XML format
 
 .SH USAGE
 .LP
@@ -267,7 +285,7 @@ This option specifies if Tidy should add the XML declaration when outputting XML
 .sp 1
 Note that if the input already includes an \fI<?xml ... ?>\fR declaration then this option will be ignored. 
 .sp 1
-If the encoding for the output is different from \fIascii\fR, one of the utf encodings or \fIraw\fR, the declaration is always added as required by the XML standard.
+If the encoding for the output is different from \fIascii\fR, one of the \fIutf*\fR encodings, or \fIraw\fR, then the declaration is always added as required by the XML standard.
 
 
 .rj 1
@@ -293,9 +311,9 @@ Default: -
 .br
 Default: -
 
-This option specifies the default \fIalt=\fR text Tidy uses for \fI<img>\fR attributes. 
+This option specifies the default \fIalt=\fR text Tidy uses for \fI<img>\fR attributes when the \fIalt=\fR attribute is missing. 
 .sp 1
-Use with care, as this feature suppresses further accessibility warnings.
+Use with care, as it is your responsibility to make your documents accessible to people who cannot see the images.
 .TP
 \fBanchor-as-name\fR
 
@@ -309,7 +327,7 @@ This option controls the deletion or addition of the \fIname\fR attribute in ele
 .sp 1
 If set to \fIyes\fR a \fIname\fR attribute, if not already existing, is added along an existing \fIid\fR attribute if the DTD allows it. 
 .sp 1
-If set to \fIno\fR any existing name attribute is removed if an\fIid\fR attribute exists or has been added.
+If set to \fIno\fR any existing name attribute is removed if an \fIid\fR attribute exists or has been added.
 .TP
 \fBassume-xml-procins\fR
 
@@ -391,7 +409,7 @@ Example: html5, omit, auto, strict, transitional, user
 
 This option specifies the DOCTYPE declaration generated by Tidy. 
 .sp 1
-If set to \fIomit\fR the output won't contain a DOCTYPE declaration. Note this this also implies \fInumeric-entities\fR is set to \fIyes\fR
+If set to \fIomit\fR the output won't contain a DOCTYPE declaration. Note this this also implies \fInumeric-entities\fR is set to \fIyes\fR.
 .sp 1
 If set to \fIhtml5\fR the DOCTYPE is set to \fI<!DOCTYPE html>\fR.
 .sp 1
@@ -446,10 +464,6 @@ If you do set this option despite the warning it will perform as \fIclean\fR exc
 If both \fIclean\fR and this option are enabled, \fI<font>\fR tags will still be dropped completely, and other styles will be preserved in a CSS class instead of inline. 
 .sp 1
 See \fIclean\fR for more information.
-
-
-.rj 1
-\fBSee also\fR: \fIclean\fR
 .TP
 \fBdrop-proprietary-attributes\fR
 
@@ -459,7 +473,7 @@ Default: no
 .br
 Example: y/n, yes/no, t/f, true/false, 1/0
 
-This option specifies if Tidy should strip out proprietary attributes, such as Microsoft data binding attributes.
+This option specifies if Tidy should strip out proprietary attributes, such as Microsoft data binding attributes. Additionally attributes that aren't permitted in the output version of HTML will be dropped if used with \fIstrict-tags-attributes\fR.
 .TP
 \fBenclose-block-text\fR
 
@@ -586,10 +600,6 @@ Default: no
 Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should combine class names to generate a single, new class name if multiple class assignments are detected on an element.
-
-
-.rj 1
-\fBSee also\fR: \fIjoin-styles\fR, \fIrepeated-attributes\fR
 .TP
 \fBjoin-styles\fR
 
@@ -600,10 +610,6 @@ Default: yes
 Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should combine styles to generate a single, new style if multiple style values are detected on an element.
-
-
-.rj 1
-\fBSee also\fR: \fIjoin-classes\fR, \fIrepeated-attributes\fR
 .TP
 \fBliteral-attributes\fR
 
@@ -947,6 +953,20 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies that Tidy should skip nested tags when parsing script and style data.
 .TP
+\fBstrict-tags-attributes\fR
+
+Type:    Boolean
+.br
+Default: no
+.br
+Example: y/n, yes/no, t/f, true/false, 1/0
+
+This options ensures that tags and attributes are applicable for the version of HTML that Tidy outputs. When set to \fIyes\fR (the default) and the output document type is a strict doctype, then Tidy will report errors. If the output document type is a loose or transitional doctype, then Tidy will report warnings. 
+.sp 1
+Additionally if \fIdrop-proprietary-attributes\fR is enabled, then not applicable attributes will be dropped, too. 
+.sp 1
+When set to \fIno\fR, these checks are not performed.
+.TP
 \fBuppercase-attributes\fR
 
 Type:    Boolean
@@ -1046,6 +1066,16 @@ Default: no
 Example: y/n, yes/no, t/f, true/false, 1/0
 
 This option specifies if Tidy should output a line break before each \fI<br>\fR element.
+.TP
+\fBescape-scripts\fR
+
+Type:    Boolean
+.br
+Default: yes
+.br
+Example: y/n, yes/no, t/f, true/false, 1/0
+
+This option causes items that look like closing tags, like \fI</g\fR to be escaped to \fI<\\/g\fR. Set this option to 'no' if you do not want this.
 .TP
 \fBindent\fR
 
@@ -1276,7 +1306,7 @@ Example: y/n, yes/no, t/f, true/false, 1/0
 
 Can be used to modify behavior of the \fIclean\fR option when set to \fIyes\fR. 
 .sp 1
-If set to \fIyes\fR when \fIclean\fR, \fI&emdash;\fR, \fI&rdquo;\fR, and other named character entities are downgraded to their closest ASCII equivalents.
+If set to \fIyes\fR when using \fIclean\fR, \fI&emdash;\fR, \fI&rdquo;\fR, and other named character entities are downgraded to their closest ASCII equivalents.
 
 
 .rj 1
