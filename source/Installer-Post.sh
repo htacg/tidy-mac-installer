@@ -11,7 +11,7 @@ chown $USER "$QR"
 chown $USER "$RM"
 
 # Create symbolic links to dylib
-V_ORIG="libtidy.5.2.0.dylib"
+V_ORIG="libtidy.5.6.0.dylib"
 V_MAJOR="libtidy.5.dylib"
 V_GEN="libtidy.dylib"
 
@@ -25,6 +25,16 @@ BP="$HOME/.bash_profile"
 touch $BP
 chown $USER $BP 
 echo "\n" >> $BP
-echo "# Tidy for Mac OS X by balthisar.com is adding the new path for Tidy." >> $BP
+echo "# Tidy for macOS is adding the new path for Tidy." >> $BP
+echo "export PATH=$new:\$PATH" >> $BP
+echo "\n" >> $BP
+
+# Add path to .zshrc.
+new=/usr/local/bin
+BP="$HOME/.bash_profile"
+touch $BP
+chown $USER $BP 
+echo "\n" >> $BP
+echo "# Tidy for macOS is adding the new path for Tidy." >> $BP
 echo "export PATH=$new:\$PATH" >> $BP
 echo "\n" >> $BP
