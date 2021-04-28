@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<installer-gui-script authoringTool="Packages" authoringToolVersion="1.2.9" authoringToolBuild="603" minSpecVersion="1.0">
+    <options rootVolumeOnly="true" customize="never" hostArchitectures="x86_64,arm64"/>
+    <volume-check script="volume_check()"/>
+    <!--+==========================+
+        |       Presentation       |
+        +==========================+-->
+    <title>DISTRIBUTION_TITLE</title>
+    <background file="background" scaling="none" alignment="bottomleft"/>
+    <background-darkAqua file="background" scaling="none" alignment="bottomleft"/>
+    <welcome file="welcome.rtf"/>
+    <license file="license.rtf"/>
+    <conclusion file="conclusion.rtf"/>
+    <!--+==========================+
+        |         Installer        |
+        +==========================+-->
+    <choices-outline>
+        <line choice="installer_choice_1"/>
+    </choices-outline>
+    <choice id="installer_choice_1" start_enabled="false" start_selected="installer_choice_1_requirement(false,true)" title="HTML Tidy" description="INSTALLER_CHOICE_1_DESCRIPTION">
+        <pkg-ref id="com.balthisar.pkg.TidyCommandLine"/>
+    </choice>
+    <!--+==========================+
+        |    Package References    |
+        +==========================+-->
+    <pkg-ref id="com.balthisar.pkg.TidyCommandLine">#HTML_Tidy.pkg</pkg-ref>
+    <!--+==========================+
+        |    JavaScript Scripts    |
+        +==========================+-->
+    <script>
+
+	const __IC_FLAT_DISTRIBUTION__=true;
+	const IC_OS_DISTRIBUTION_TYPE_ANY=0;
+	const IC_OS_DISTRIBUTION_TYPE_CLIENT=1;
+	const IC_DISK_TYPE_DESTINATION=0;
+	const IC_OS_DISTRIBUTION_TYPE_SERVER=2;
+	const IC_DISK_TYPE_STARTUP_DISK=1;
+
+	function IC_CheckOS(inDiskType,inMustBeInstalled,inMinimumVersion,inMaximumVersion,inDistributionType)
+	{
+		var tOSVersion=undefined;
+		
+		/* Check Version Constraints */
+		
+		if (inDiskType==IC_DISK_TYPE_DESTINATION)
+		{
+			if (my.target.systemVersion!=undefined)
+			{
+				tOSVersion=my.target.systemVersion.ProductVersion;
+			}
+			
+			/* Check if no OS is installed on the potential target */
+			
+			if (tOSVersion==undefined)
+			{
+				return (inMustBeInstalled==false);
+			}
+			
+			if (inMustBeInstalled==false)
+			{
+				return false;
+			}
+		}
+		else
+		{
+			tOSVersion=system.version.ProductVersion;
+		}
+		
+		if (system.compareVersions(tOSVersion,inMinimumVersion)==-1)
+			return false;
+			
+		if (inMaximumVersion!=undefined &amp;&amp;
+			system.compareVersions(tOSVersion,inMaximumVersion)==1)
+			return false;
+		
+		/* Check Distribution Type */
+		
+		if (inDistributionType!=IC_OS_DISTRIBUTION_TYPE_ANY)
+		{
+			var tIsServer;
+			
+			if (system.compareVersions(tOSVersion,'10.8.0')==-1)
+			{
+				if (inDiskType==IC_DISK_TYPE_DESTINATION)
+				{
+					tIsServer=system.files.fileExistsAtPath(my.target.mountpoint+'/System/Library/CoreServices/ServerVersion.plist');
+				}
+				else
+				{
+					tIsServer=system.files.fileExistsAtPath('/System/Library/CoreServices/ServerVersion.plist');
+				}
+			}
+			else
+			{
+				if (inDiskType==IC_DISK_TYPE_DESTINATION)
+				{
+					tIsServer=system.files.fileExistsAtPath(my.target.mountpoint+'/Applications/Server.app');
+				}
+				else
+				{
+					tIsServer=system.files.fileExistsAtPath('/Applications/Server.app');
+				}
+			}
+			
+			if (inDistributionType==IC_OS_DISTRIBUTION_TYPE_CLIENT &amp;&amp; tIsServer==true)
+			{
+				return false;
+			}
+			
+			if (inDistributionType==IC_OS_DISTRIBUTION_TYPE_SERVER &amp;&amp; tIsServer==false)
+			{
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+	function volume_check()
+	{
+		var tResult;
+
+		tResult=IC_CheckOS(IC_DISK_TYPE_DESTINATION,true,'10.8',undefined,IC_OS_DISTRIBUTION_TYPE_ANY);
+
+		if (tResult==false)
+		{
+			my.result.message = system.localizedString('REQUIREMENT_FAILED_MESSAGE_VOLUME_CHECK_1');
+			my.result.type = 'Fatal';
+		}
+
+		return tResult;
+	}
+
+	function installer_choice_1_requirement(inCheckVisibilityOnly,inShowFailedToolTip)
+	{
+		var tResult;
+
+		tResult=IC_CheckOS(IC_DISK_TYPE_DESTINATION,true,'10.8',undefined,IC_OS_DISTRIBUTION_TYPE_ANY);
+
+		if (tResult==false)
+		{
+			if (inCheckVisibilityOnly==true)
+			{
+				tResult=true;
+			}
+			else
+			{
+				if (inShowFailedToolTip==true)
+				{
+					choices.installer_choice_1.tooltip=system.localizedString('INSTALLER_CHOICE_1_REQUIREMENT_FAILED_1');
+				}
+			}
+		}
+
+		return tResult;
+	}
+
+    </script>
+</installer-gui-script>
