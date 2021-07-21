@@ -224,7 +224,7 @@ composite \
 cd "${DIR_DIMG}"
 mkdir -p "build/artifacts"
 
-FILE_IMAGE="${DIR_DIMG}/build/artifacts/tidy-${VERSION_TIDY}-macos-x86_64+arm.dmg"
+FILE_IMAGE="${DIR_DIMG}/build/artifacts/tidy-${VERSION_TIDY}-macos-x86_64+arm64.dmg"
 
 create-dmg \
     --volname "HTML Tidy for macOS" \
@@ -288,7 +288,7 @@ done
 # solo use and copy it into artifacts, too.
 #---------------------------------------------------------------------
 
-FILE_PKG="tidy-${VERSION_TIDY}-macos-x86_64+arm.pkg"
+FILE_PKG="tidy-${VERSION_TIDY}-macos-x86_64+arm64.pkg"
 cp \
     "${DIR_DIMG}/build/dmg_contents/Install HTML Tidy.pkg" \
     "${DIR_DIMG}/build/artifacts/${FILE_PKG}"
